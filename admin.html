@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Pie in the Sky Pizza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Abril Fatface"', 'serif'],
+            serif: ['Merriweather', 'serif'],
+            sans: ['Karla', 'sans-serif'],
+          },
+          colors: {
+            blue: '#4A6E8B',
+            'blue-dark': '#3A5A78',
+            gold: '#F0D06B',
+            'gold-dark': '#D4B040',
+            navy: '#1A1A2E',
+            cream: '#FFFEF7',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    *:focus-visible { outline: 2px solid #F0D06B; outline-offset: 2px; }
+  </style>
+</head>
+<body class="font-sans bg-cream text-navy antialiased min-h-screen">
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-sm">
+      <div class="text-center mb-8">
+        <h1 class="font-display text-navy text-3xl mb-2">Pie in the Sky</h1>
+        <p class="font-serif italic text-blue">Admin Dashboard</p>
+      </div>
+      <form id="login-form" class="bg-white rounded-2xl border border-navy/10 p-6 shadow-sm">
+        <label class="font-sans text-sm font-bold text-navy block mb-2">Password</label>
+        <input type="password" id="admin-password" placeholder="Enter admin password"
+          class="w-full px-4 py-3 border border-navy/20 rounded-xl font-sans text-navy mb-4 focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue" />
+        <div id="login-error" class="hidden bg-red-50 text-red-600 font-sans text-sm p-3 rounded-xl mb-4">
+          Wrong password. Try again.
+        </div>
+        <button type="submit" class="w-full bg-blue text-white font-bold text-sm uppercase tracking-wider py-3 rounded-full hover:bg-blue-dark transition-colors">
+          Log In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="hidden">
+    <!-- Top bar -->
+    <div class="bg-navy text-white px-6 py-4">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div>
+          <h1 class="font-display text-xl">Pie in the Sky</h1>
+          <p class="font-sans text-white/40 text-xs">Admin Dashboard</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="flex items-center gap-2 text-white/40 text-sm">
+            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+            Auto-refreshing
+          </span>
+          <a href="order.html" class="font-sans text-gold text-sm font-bold hover:underline">View Order Page →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-8">
+      <!-- KPIs -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-2xl border border-navy/10 p-5 shadow-sm">
+          <p class="font-sans text-navy/40 text-xs uppercase tracking-wider mb-1">Today's Revenue</p>
+          <p class="font-display text-navy text-3xl" id="kpi-revenue">$0.00</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-navy/10 p-5 shadow-sm">
+          <p class="font-sans text-navy/40 text-xs uppercase tracking-wider mb-1">Orders Today</p>
+          <p class="font-display text-navy text-3xl" id="kpi-orders">0</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-navy/10 p-5 shadow-sm">
+          <p class="font-sans text-navy/40 text-xs uppercase tracking-wider mb-1">Most Popular</p>
+          <p class="font-display text-navy text-xl truncate" id="kpi-popular">—</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-navy/10 p-5 shadow-sm">
+          <p class="font-sans text-navy/40 text-xs uppercase tracking-wider mb-1">Avg Order Value</p>
+          <p class="font-display text-navy text-3xl" id="kpi-avg">$0.00</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Left: Order Queue -->
+        <div class="lg:col-span-2 space-y-6">
+          <div>
+            <h2 class="font-display text-navy text-2xl mb-4">Live Orders</h2>
+            <div id="order-queue" class="space-y-4">
+              <p class="font-serif text-navy/40 italic text-center py-8">Loading orders...</p>
+            </div>
+          </div>
+
+          <!-- Revenue Chart -->
+          <div>
+            <h2 class="font-display text-navy text-2xl mb-4">Revenue — Last 7 Days</h2>
+            <div class="bg-white rounded-2xl border border-navy/10 p-5 shadow-sm" style="height:300px">
+              <canvas id="revenue-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Inventory -->
+        <div>
+          <h2 class="font-display text-navy text-2xl mb-4">Inventory</h2>
+          <div id="inventory-list" class="space-y-3">
+            <p class="font-serif text-navy/40 italic text-center py-8">Loading inventory...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

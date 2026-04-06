@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Online — Pie in the Sky Pizza · Cayucos, CA</title>
+  <meta name="description" content="Order sourdough pizza for pickup from Pie in the Sky Pizza in Cayucos, CA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Abril Fatface"', 'serif'],
+            serif: ['Merriweather', 'serif'],
+            sans: ['Karla', 'sans-serif'],
+          },
+          colors: {
+            blue: '#4A6E8B',
+            'blue-dark': '#3A5A78',
+            gold: '#F0D06B',
+            'gold-dark': '#D4B040',
+            navy: '#1A1A2E',
+            cream: '#FFFEF7',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .wipe { position: relative; overflow: hidden; transition: color .25s; }
+    .wipe::before { content: ''; position: absolute; inset: 0; background: #F0D06B; transform: translateX(-105%); transition: transform .28s ease; z-index: 0; }
+    .wipe:hover::before { transform: translateX(0); }
+    .wipe:hover { color: #1A1A2E !important; }
+    .wipe > span { position: relative; z-index: 1; }
+    *:focus-visible { outline: 2px solid #F0D06B; outline-offset: 2px; }
+  </style>
+</head>
+<body class="font-sans bg-cream text-navy antialiased overflow-x-hidden">
+
+  <!-- AWNING -->
+  <div style="position:relative;z-index:60;line-height:0">
+    <div style="display:flex;width:100%;height:48px;overflow:hidden">
+      <div style="flex:1;background:repeating-linear-gradient(90deg,#4A6E8B 0px,#4A6E8B 28px,#F0D06B 28px,#F0D06B 56px)"></div>
+    </div>
+    <svg viewBox="0 0 1440 28" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;margin-top:-1px" preserveAspectRatio="none">
+      <defs>
+        <pattern id="awn" x="0" y="0" width="80" height="28" patternUnits="userSpaceOnUse">
+          <rect width="40" height="28" fill="#4A6E8B"/>
+          <rect x="40" width="40" height="28" fill="#F0D06B"/>
+          <ellipse cx="40" cy="0" rx="40" ry="18" fill="white"/>
+        </pattern>
+      </defs>
+      <rect width="1440" height="28" fill="url(#awn)"/>
+    </svg>
+  </div>
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="font-display text-navy text-xl tracking-tight cursor-pointer">Pie in the Sky</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html#menu" class="font-sans text-xs uppercase tracking-widest text-blue font-semibold hover:text-navy transition-colors cursor-pointer">Menu</a>
+        <a href="index.html#story" class="font-sans text-xs uppercase tracking-widest text-blue font-semibold hover:text-navy transition-colors cursor-pointer">About</a>
+        <a href="index.html#visit" class="font-sans text-xs uppercase tracking-widest text-blue font-semibold hover:text-navy transition-colors cursor-pointer">Visit</a>
+      </div>
+      <a href="order.html" class="wipe bg-blue text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 rounded-full cursor-pointer border border-blue">
+        <span>Order Online</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="max-w-4xl mx-auto px-4 py-8 pb-32">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="font-display text-navy text-4xl mb-2">Order Pickup</h1>
+      <p class="font-serif italic text-blue text-lg">Choose your pies, pay online, skip the line</p>
+    </div>
+
+    <!-- Step indicators -->
+    <div class="flex items-center justify-center gap-2 mb-10">
+      <div data-step-indicator="1" class="w-8 h-8 rounded-full bg-blue text-white flex items-center justify-center font-bold text-sm">1</div>
+      <div class="w-8 h-px bg-navy/20"></div>
+      <div data-step-indicator="2" class="w-8 h-8 rounded-full bg-navy/10 text-navy/40 flex items-center justify-center font-bold text-sm">2</div>
+      <div class="w-8 h-px bg-navy/20"></div>
+      <div data-step-indicator="3" class="w-8 h-8 rounded-full bg-navy/10 text-navy/40 flex items-center justify-center font-bold text-sm">3</div>
+      <div class="w-8 h-px bg-navy/20"></div>
+      <div data-step-indicator="4" class="w-8 h-8 rounded-full bg-navy/10 text-navy/40 flex items-center justify-center font-bold text-sm">✓</div>
+    </div>
+
+    <!-- STEP 1: Menu -->
+    <div data-step="1">
+      <div id="menu-items">
+        <div class="text-center py-12">
+          <div class="inline-block w-8 h-8 border-3 border-blue border-t-transparent rounded-full animate-spin"></div>
+          <p class="font-serif text-navy/40 mt-3">Loading menu...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Checkout Form -->
+    <div data-step="2" class="hidden">
+      <div class="max-w-lg mx-auto">
+        <h2 class="font-display text-navy text-2xl mb-6">Your Details</h2>
+
+        <!-- Cart summary -->
+        <div class="bg-white rounded-2xl border border-navy/10 p-5 mb-6">
+          <h3 class="font-sans font-bold text-navy mb-3">Order Summary</h3>
+          <div id="cart-detail"></div>
+        </div>
+
+        <form id="checkout-form" class="space-y-4">
+          <div>
+            <label class="font-sans text-sm font-bold text-navy block mb-1">Name *</label>
+            <input type="text" id="customer-name" required placeholder="Your name"
+              class="w-full px-4 py-3 border border-navy/20 rounded-xl font-sans text-navy focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue" />
+          </div>
+          <div>
+            <label class="font-sans text-sm font-bold text-navy block mb-1">Phone</label>
+            <input type="tel" id="customer-phone" placeholder="(805) 555-0123"
+              class="w-full px-4 py-3 border border-navy/20 rounded-xl font-sans text-navy focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue" />
+          </div>
+          <div>
+            <label class="font-sans text-sm font-bold text-navy block mb-1">Email</label>
+            <input type="email" id="customer-email" placeholder="you@example.com"
+              class="w-full px-4 py-3 border border-navy/20 rounded-xl font-sans text-navy focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue" />
+          </div>
+          <div>
+            <label class="font-sans text-sm font-bold text-navy block mb-1">Pickup Time</label>
+            <select id="pickup-time"
+              class="w-full px-4 py-3 border border-navy/20 rounded-xl font-sans text-navy focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue bg-white">
+              <option value="ASAP">ASAP</option>
+              <option value="30 minutes">In 30 minutes</option>
+              <option value="1 hour">In 1 hour</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-sans text-sm font-bold text-navy block mb-1">Special Instructions</label>
+            <textarea id="order-notes" rows="2" placeholder="Any allergies or special requests?"
+              class="w-full px-4 py-3 border border-navy/20 rounded-xl font-sans text-navy focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue resize-none"></textarea>
+          </div>
+
+          <div id="form-error" class="hidden bg-red-50 text-red-600 font-sans text-sm p-3 rounded-xl"></div>
+
+          <div class="flex gap-3 pt-2">
+            <button type="button" onclick="goToStep(1)" class="px-6 py-3 border-2 border-navy/20 text-navy font-bold text-sm rounded-full hover:bg-navy/5 transition-colors">Back</button>
+            <button type="submit" class="flex-1 bg-blue text-white font-bold text-sm uppercase tracking-wider py-3 rounded-full hover:bg-blue-dark transition-colors">Continue to Payment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- STEP 3: Payment -->
+    <div data-step="3" class="hidden">
+      <div class="max-w-lg mx-auto">
+        <h2 class="font-display text-navy text-2xl mb-6">Payment</h2>
+        <div class="bg-white rounded-2xl border border-navy/10 p-6 mb-6">
+          <div id="payment-element" class="mb-4"></div>
+          <div id="pay-error" class="hidden bg-red-50 text-red-600 font-sans text-sm p-3 rounded-xl mb-4"></div>
+          <button id="pay-btn" disabled class="w-full bg-gold text-navy font-bold text-sm uppercase tracking-wider py-4 rounded-full hover:bg-gold-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            Setting up payment...
+          </button>
+        </div>
+        <button onclick="goToStep(2)" class="font-sans text-blue text-sm font-bold hover:underline">← Back to details</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Confirmation -->
+    <div data-step="4" class="hidden">
+      <div class="max-w-lg mx-auto text-center">
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="font-display text-navy text-3xl mb-2">Order Confirmed!</h2>
+        <p class="font-serif italic text-blue text-lg mb-8">We're firing up the oven</p>
+        <div class="bg-white rounded-2xl border border-navy/10 p-6 mb-8 text-left space-y-3">
+          <div class="flex justify-between">
+            <span class="font-sans text-navy/50">Order Number</span>
+            <span class="font-sans font-bold text-navy" id="confirm-order-number"></span>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-sans text-navy/50">Pickup Time</span>
+            <span class="font-sans font-bold text-navy" id="confirm-pickup-time"></span>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-sans text-navy/50">Total Paid</span>
+            <span class="font-sans font-bold text-navy" id="confirm-total"></span>
+          </div>
+        </div>
+        <p class="font-serif text-navy/40 text-sm mb-6">Head to the kiosk at the Cayucos Pier when it's time!</p>
+        <button onclick="startNewOrder()" class="bg-blue text-white font-bold text-sm uppercase tracking-wider px-8 py-3 rounded-full hover:bg-blue-dark transition-colors">Start New Order</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sticky Cart Bar -->
+  <div id="cart-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-navy text-white p-4 shadow-2xl transform translate-y-full transition-transform duration-300">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="bg-gold text-navy font-bold text-sm w-7 h-7 rounded-full flex items-center justify-center" id="cart-count">0</span>
+        <span class="font-sans font-bold" id="cart-total">$0.00</span>
+      </div>
+      <button onclick="goToCheckout()" class="bg-gold text-navy font-bold text-sm uppercase tracking-wider px-8 py-3 rounded-full hover:bg-gold-dark transition-colors">
+        Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-8 px-6" style="background-color:#1A1A2E;">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="font-display text-cream text-lg">Pie in the Sky Pizza</p>
+        <p class="font-serif text-cream/40 text-xs mt-1">156½ Ocean Front Ave · Cayucos, CA</p>
+      </div>
+      <p class="font-sans text-cream/20 text-xs">© 2026 Pie in the Sky Pizza</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="assets/order.js"></script>
+</body>
+</html>
